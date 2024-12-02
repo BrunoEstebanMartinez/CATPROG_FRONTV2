@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom"
-import { FichaPrograma } from "../pages"
+import { FichaPrograma, FichaGlobal } from "../pages"
 
 export const AlineacionRoutes = () => {
 
@@ -8,6 +8,7 @@ export const AlineacionRoutes = () => {
     <>
         <Routes>
             <Route path = "fichaprograma/*" element = { <FichaPrograma/> }/>
+            <Route path = "fichaprograma/fichaglobal/*" element = { <FichaGlobal /> }/>
         </Routes>
     </>
 
