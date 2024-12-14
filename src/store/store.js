@@ -4,6 +4,8 @@ import { publicConsultsSlice } from './public/publicSlice'
 import { catalogosSlice, editSlice, validacionSlice } from './public'
 import { periodosSlice } from './public/periodosSlice'
 import { programasSlice } from './public/programasSlice'
+import { detalleProgSlice } from './public/detalleProgSlice'
+import {  infoProgramaSlice }    from './public/infoProgramaSlice';
 import { auxPublicConsultsSlice } from './public/auxPublicSlice'
 import { curpSlice } from './public/curpSlice'
 import { fileSlice } from './public/fileSlice'
@@ -15,6 +17,8 @@ export const store = configureStore({
     catalogos: catalogosSlice.reducer,
     periodos: periodosSlice.reducer,
     programas: programasSlice.reducer,
+    detalleprograma: detalleProgSlice.reducer,
+    infoprograma: infoProgramaSlice.reducer,
     consultas: publicConsultsSlice.reducer,
     edit: editSlice.reducer,
     validacion: validacionSlice.reducer,

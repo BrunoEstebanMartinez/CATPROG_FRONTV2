@@ -105,6 +105,60 @@ export const getProgramas = async (path, idperiodo, token) => {
 
 }
 
+export const getDetailProgramaInit = async (path, idperiodo, id_prog, token) => {
+    try {
+
+        const response = await baseApi.post(`${path}`, 
+            {isperiodo:idperiodo,
+             id_prog:id_prog
+            },
+            {headers: {
+                'token': token,
+            }
+        });
+      
+       const {message, release, data} = response.data['JsonResponse'];
+       const alerts = manageErrors(release);
+        
+        if(alerts['internalCode'].localeCompare("1") != 0){
+
+            return {
+                type: alerts['type'],
+                status: alerts['status'],
+                release: release,
+                message: message,
+                data: []
+           };
+
+        }else{
+
+            
+
+            return {
+                type: alerts['type'],
+                status: alerts['status'],
+                release: release,
+                message: message,
+                data: data
+           };
+
+        }
+      
+
+      
+
+    }catch(e){
+        return {
+                type: 'frontend',
+                status: false,
+                release: '0000',
+                message: e,
+                data: []
+        };
+    }
+
+}
+
 export const getAllData = async ( currentPage, path, token ) => {
 
     try {

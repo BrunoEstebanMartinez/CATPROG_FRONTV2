@@ -2,18 +2,24 @@ import {React, useEffect, useState} from "react";
 import { useLocation, Routes, Route, useNavigate } from "react-router-dom";
 import { FichaRegPrograma } from "./FichaRegPrograma";
 import { FichaObjectivo } from "./FichaObjetivo";
+import { useDispatch, useSelector } from "react-redux";
+import { onDispatchInfoPrograma } from "../../store";
 
 export const FichaGlobal = () => {
 
-
-
-    const [linked, setLinked] = useState('');
     const { state, location } = useLocation();
+    const [alocalInfo, setLocalInfo] = useState(false);
     const navigate  = useNavigate();
 
-    console.log(location);
-    console.log(state);
+    const info = localStorage.getItem("isObjectInfo");
+
+
+    useEffect(() => {
+
+    }, []);
+
     
+    console.log(JSON.parse(info)[0]);
 
     return (<>
         <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
@@ -81,7 +87,7 @@ export const FichaGlobal = () => {
                     <div className = 'bg-white p-4 drop-shadow-2xl rounded-lg'>
                         <div className = 'grid grid-cols-12 gap-4'>
                                 <div className = 'col-span-6'><p className = 'text-xs font-bold'>Tipo Responsable:</p></div>
-                                <div className = 'col-span-6'><p className = 'text-xs font-normal'>Responsable:</p></div>
+                                <div className = 'col-span-6'><p className = 'text-xs font-normal'>{}</p></div>
                                 <div className = 'col-span-6'><p className = 'text-xs font-bold'>Grupo responsable:</p></div>
                                 <div className = 'col-span-6'><p className = 'text-xs font-normal'>Responsable:</p></div>
                                 <div className = 'col-span-6'><p className = 'text-xs font-bold'>Dependencia y/o organismo auxiliar:</p></div>
@@ -114,7 +120,7 @@ export const FichaGlobal = () => {
                                 <svg class="w-3 h-3 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12.25V1m0 11.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M4 19v-2.25m6-13.5V1m0 2.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M10 19V7.75m6 4.5V1m0 11.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM16 19v-2"/>
                                 </svg>
-                                Proyecto presupuestal
+                                Presupuesto
                             </button>
                             <button type="button" class="inline-flex items-center px-4 py-2 text-xs font-medium text-gray-900 bg-transparent border border-b border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
                                 <svg class="w-3 h-3 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -145,11 +151,10 @@ export const FichaGlobal = () => {
 
                     <div class = 'bg-white drop-shadow-2xl'>
                         <Routes>
-                            <Route path = 'programa' element = {<FichaRegPrograma />}/>
-                            <Route path = 'objetivo' element = {<FichaObjectivo />}/>
+                            <Route path = 'programa' element = {<FichaRegPrograma  />}/>
+                            <Route path = 'objetivo' element = {<FichaObjectivo    />}/>
 
                         </Routes>
-
                     </div>
 
                 </div>
@@ -162,4 +167,7 @@ export const FichaGlobal = () => {
     </>);
 
 }
+
+
+
 

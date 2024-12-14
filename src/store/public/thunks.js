@@ -4,8 +4,10 @@ import { setCatalogos, cleanCatalogos } from "./catalogosSlice";
 import { cleaningEditData, gettingEditData } from "./editSlice";
 import { cleanPeriodos, setPeriodos } from "./periodosSlice";
 import { cleanProgramas, setProgramas } from "./programasSlice";
+import { cleanDetalle, setDetalle} from "./detalleProgSlice";
 import { cleanConsultas, gettingConsultas } from "./publicSlice"
 import { addData, cleanData, failData, savingData } from "./validacionSlice";
+import { setPrograma, cleanPrograma} from './infoProgramaSlice';
 
 
 export const getPeriodosRed = (path, token) => {
@@ -42,6 +44,33 @@ export const getProgramasRed = (path, periodoid, token) => {
 
                 
     }
+}
+
+export const getDetalle = (path, periodoid, prog_id, token) => {
+    return async (dispatch) => {
+
+        dispatch((cleanDetalle()));
+
+            const consulta = await getDetalle(path, periodoid, prog_id, token);
+            console.log(consulta.data);
+            console.log(periodoid);
+
+                if(consulta.status) return dispatch(setDetalle(consulta.data));
+
+
+                dispatch(cleanDetalle());
+                
+    }
+}
+
+export const onDispatchInfoPrograma = (prog_id, periodo_id) => {
+    return (dispatch) => {
+    
+        console.log(periodo_id);
+          dispatch(setPrograma(prog_id, periodo_id));
+        
+    }
+
 }
 
 export const getData = (currentPage, path, token) => {
