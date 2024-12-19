@@ -8,4 +8,5 @@ export * from './public/periodosSlice';
 export * from './public/programasSlice';
 export * from './public/detalleProgSlice';
 export * from './public/infoProgramaSlice';
+export * from './public/detalleObjSlice';
 

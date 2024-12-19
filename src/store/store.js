@@ -10,6 +10,7 @@ import { auxPublicConsultsSlice } from './public/auxPublicSlice'
 import { curpSlice } from './public/curpSlice'
 import { fileSlice } from './public/fileSlice'
 import { coordSlice } from './public/CoordSlice'
+import { detalleObjSlice } from './public/detalleObjSlice'
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ export const store = configureStore({
     programas: programasSlice.reducer,
     detalleprograma: detalleProgSlice.reducer,
     infoprograma: infoProgramaSlice.reducer,
+    detalleobjetivo: detalleObjSlice.reducer, 
     consultas: publicConsultsSlice.reducer,
     edit: editSlice.reducer,
     validacion: validacionSlice.reducer,

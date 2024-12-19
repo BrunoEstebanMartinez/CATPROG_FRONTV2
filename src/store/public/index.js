@@ -7,3 +7,4 @@ export * from './thunks';
 export * from './validacionSlice';
 export * from './infoSlice';
 export * from './infoProgramaSlice';
+export * from './detalleObjSlice';

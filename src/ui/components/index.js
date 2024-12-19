@@ -13,4 +13,5 @@ export * from './CustomSelectLanding';
 export * from './SkeletonCL';
 export * from './SkeletonCR';
 export * from './Loading';
+export * from './NavbarClient';
 

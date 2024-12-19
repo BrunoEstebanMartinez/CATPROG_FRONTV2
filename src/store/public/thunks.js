@@ -1,6 +1,15 @@
-import { deleteAgenda, getAllData, getAllDataAux, getEditFields, getSearchData, saveData, updateData, getPeriodos, getProgramas } from "../../api";
+import { 
+        getAllData, 
+        getAllDataAux, 
+        getEditFields, 
+        getSearchData, 
+        saveData, 
+        updateData, 
+        getPeriodos, 
+        getDetailProgramaInit, 
+        getDetailObjetivo,
+        getProgramas } from "../../api";
 import { cleanConsultasAux, gettingConsultasAux } from "./auxPublicSlice";
-import { setCatalogos, cleanCatalogos } from "./catalogosSlice";
 import { cleaningEditData, gettingEditData } from "./editSlice";
 import { cleanPeriodos, setPeriodos } from "./periodosSlice";
 import { cleanProgramas, setProgramas } from "./programasSlice";
@@ -8,6 +17,7 @@ import { cleanDetalle, setDetalle} from "./detalleProgSlice";
 import { cleanConsultas, gettingConsultas } from "./publicSlice"
 import { addData, cleanData, failData, savingData } from "./validacionSlice";
 import { setPrograma, cleanPrograma} from './infoProgramaSlice';
+import { setDetalleObj, cleanDetalleObj } from "./detalleObjSlice";
 
 
 export const getPeriodosRed = (path, token) => {
@@ -47,20 +57,44 @@ export const getProgramasRed = (path, periodoid, token) => {
 }
 
 export const getDetalle = (path, periodoid, prog_id, token) => {
+
+    
+
     return async (dispatch) => {
 
-        dispatch((cleanDetalle()));
+        dispatch(cleanPrograma());
 
-            const consulta = await getDetalle(path, periodoid, prog_id, token);
-            console.log(consulta.data);
-            console.log(periodoid);
+            const consulta = await getDetailProgramaInit(path, periodoid, prog_id, token);
+            
 
-                if(consulta.status) return dispatch(setDetalle(consulta.data));
+                if(consulta.status) return dispatch(setPrograma(consulta.data));
+
+        dispatch(cleanPrograma());
 
 
-                dispatch(cleanDetalle());
-                
     }
+}
+
+export const getObjetivoPrograma = (path, periodo_id, prog_id, token) => {
+
+    return async (dispatch) => {
+
+            dispatch(cleanDetalleObj());
+
+            console.log("objetivo" + periodo_id + prog_id);
+
+                const consulta = await getDetailObjetivo(path, periodo_id, prog_id, token);
+                console.log(consulta);
+
+                if(consulta.status) return dispatch(setDetalleObj(consulta.data));
+
+            dispatch(cleanDetalleObj());
+    }
+
+}
+
+export const editObjetivoPrograma = (path, data, periodo_id, prog_id, token) => {
+
 }
 
 export const onDispatchInfoPrograma = (prog_id, periodo_id) => {
@@ -157,6 +191,7 @@ export const storeData = ( path, data, token ) => {
             if( saveResponse.success )
                 return dispatch( addData( saveResponse.dataResponse ) )
             else 
+                console.log(saveResponse);
                 return dispatch( failData( saveResponse.dataResponse ) )
         }
 
@@ -196,40 +231,6 @@ export const putData = ( path, data, id, token ) => {
 }
 
 
-/*
-export const getCatalogos = ( token ) => {
-
-    return async( dispatch ) => {
-
-        const catalogos = await getAllCatalogos( token );
-
-        dispatch( setCatalogos( catalogos ) );
 
 
-    }
 
-
-}
-
-*/
-
-export const eliminateAgenda = ( id, token) => {
-
-    return async (dispatch) => {
-
-
-        const eliminacion = await deleteAgenda( id, token );
-
-        if ( eliminacion.success ) {
-
-            const agenda = await getAllData( 1, '/get-agenda', token );
-
-            if ( agenda.ok ) return dispatch( gettingConsultas( agenda.data ) );
-
-
-        }
-
-
-    }
-
-}

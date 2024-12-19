@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-export const FichaRegPrograma = ({safePeriodo, safeCvePrograma}) =>{
+export const FichaRegPrograma = () =>{
 
     const navigate = useNavigate();
 
